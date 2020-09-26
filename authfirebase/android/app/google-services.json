@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "980119601921",
+    "firebase_url": "https://authfirebase-fef3a.firebaseio.com",
+    "project_id": "authfirebase-fef3a",
+    "storage_bucket": "authfirebase-fef3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980119601921:android:0ea2e8a57f7ed13a961100",
+        "android_client_info": {
+          "package_name": "com.example.authfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980119601921-2t5jlg6jd6amdgr97jihdn218e4mp8lr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYqXTftnXfUKLLi36-YcIEXVsWHrsFJOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980119601921-2t5jlg6jd6amdgr97jihdn218e4mp8lr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
