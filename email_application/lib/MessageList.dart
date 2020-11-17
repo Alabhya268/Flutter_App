@@ -13,8 +13,7 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
-  var messages = const [
-  ];
+  var messages = const [];
 
   Future loadMessageList() async {
     var content = await rootBundle.loadString('data/message.json');
@@ -48,9 +47,10 @@ class _MessageListState extends State<MessageList> {
             leading: CircleAvatar(
               child: Text('As'),
             ),
-            subtitle: Text(message['body'],
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            subtitle: Text(
+              message['body'],
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         },
