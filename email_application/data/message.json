@@ -1,0 +1,8 @@
+[
+    {"subject": "My first message", "body": "lorem ipsem"},
+    {"subject": "my seconf message", "body": "lorem ipsem"},
+    {"subject": "You won a lottery", "body": "lorem ipsem"},
+    {"subject": "You should read this messages", "body": "lorem ipsem"},
+    {"subject": "You have lottery again", "body": "lorem ipsem"},
+    {"subject": "Another entry from json", "body": "lorem ipsem"}
+]
