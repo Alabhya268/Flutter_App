@@ -1,3 +1,4 @@
+import 'package:email_application/ComposeButton.dart';
 import 'package:email_application/Message.dart';
 import 'package:email_application/MessageCompose.dart';
 import 'package:email_application/MessageDetail.dart';
@@ -79,15 +80,7 @@ class _MessageListState extends State<MessageList> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (BuildContext context) =>
-             MessageCompose(),
-          ),);
-        },
-      ),
+      floatingActionButton: ComposeButton(),
     );
   }
 }
