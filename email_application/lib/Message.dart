@@ -9,6 +9,6 @@ class Message {
 
   Message(this.subject, this.body);
 
- factory Message.fromJson(Map<String, dynamic> json)
-      =>_$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      _$MessageFromJson(json);
 }

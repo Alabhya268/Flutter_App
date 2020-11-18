@@ -17,7 +17,8 @@ class _MessageListState extends State<MessageList> {
   List<Message> messages = const [];
 
   Future loadMessageList() async {
-    http.Response response = await http.get('https://run.mocky.io/v3/63460031-a7c6-417f-aecd-91dfb0a43b89');
+    http.Response response = await http
+        .get('https://run.mocky.io/v3/63460031-a7c6-417f-aecd-91dfb0a43b89');
     String content = response.body;
     List collection = json.decode(content);
     List<Message> _messages =
