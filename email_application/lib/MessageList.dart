@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:email_application/Message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,11 +17,13 @@ class _MessageListState extends State<MessageList> {
   var messages = const [];
 
   Future loadMessageList() async {
-    var content = await rootBundle.loadString('data/message.json');
-    var collection = json.decode(content);
+    String content = await rootBundle.loadString('data/message.json');
+    List collection = json.decode(content);
+    List<Message> _messages =
+        collection.map((json) => Message.fromJson(json)).toList();
 
     setState(() {
-      messages = collection;
+      messages = _messages;
     });
     print(content);
   }
@@ -40,15 +43,15 @@ class _MessageListState extends State<MessageList> {
         itemCount: messages.length,
         separatorBuilder: (context, index) => Divider(),
         itemBuilder: (BuildContext context, int index) {
-          var message = messages[index];
+          Message message = messages[index];
           return ListTile(
-            title: Text(message['subject']),
+            title: Text(message.subject),
             isThreeLine: true,
             leading: CircleAvatar(
               child: Text('As'),
             ),
             subtitle: Text(
-              message['body'],
+              message.body,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
