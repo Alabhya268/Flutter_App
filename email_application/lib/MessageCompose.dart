@@ -7,9 +7,30 @@ class MessageCompose extends StatelessWidget {
       appBar: AppBar(
         title: Text('Compose Message'),
       ),
-      body: Center(
-        child: Text('Compose New Message'),
-      ),
+      body: Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Compose New Message',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RaisedButton(
+                    child: Text('Love'),
+                    onPressed: () {},
+                  ),
+                  RaisedButton(
+                    child: Text('Hate'),
+                    onPressed: () {},
+                  )
+                ],
+              )
+            ],
+          )),
     );
   }
 }

@@ -69,10 +69,13 @@ class _MessageListState extends State<MessageList> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext context) =>
-                         MessageDetail(message.subject, message.body),
-                      ),);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              MessageDetail(message.subject, message.body),
+                        ),
+                      );
                     },
                   );
                 },
