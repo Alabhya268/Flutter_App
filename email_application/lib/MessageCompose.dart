@@ -21,11 +21,15 @@ class MessageCompose extends StatelessWidget {
                 children: [
                   RaisedButton(
                     child: Text('Love'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context, 'Love');
+                    },
                   ),
                   RaisedButton(
                     child: Text('Hate'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context, 'Hate');
+                    },
                   )
                 ],
               )
