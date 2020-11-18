@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.1
 
 dev_dependencies:
+  http:
   build_runner:
   json_serializable:
   flutter_test:
