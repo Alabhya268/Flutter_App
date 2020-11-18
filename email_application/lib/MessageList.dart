@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:email_application/Message.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class MessageList extends StatefulWidget {
   final String title;
@@ -14,52 +11,65 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
-  List<Message> messages = const [];
-
-  Future loadMessageList() async {
-    http.Response response = await http
-        .get('https://run.mocky.io/v3/63460031-a7c6-417f-aecd-91dfb0a43b89');
-    String content = response.body;
-    List collection = json.decode(content);
-    List<Message> _messages =
-        collection.map((json) => Message.fromJson(json)).toList();
-
-    setState(() {
-      messages = _messages;
-    });
-    print(content);
-  }
+  Future<List<Message>> messages;
 
   void initState() {
-    loadMessageList();
     super.initState();
+    messages = Message.browse();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text(widget.title)),
-      ),
-      body: ListView.separated(
-        itemCount: messages.length,
-        separatorBuilder: (context, index) => Divider(),
-        itemBuilder: (BuildContext context, int index) {
-          Message message = messages[index];
-          return ListTile(
-            title: Text(message.subject),
-            isThreeLine: true,
-            leading: CircleAvatar(
-              child: Text('As'),
-            ),
-            subtitle: Text(
-              message.body,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          );
-        },
-      ),
-    );
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                var _messages = Message.browse();
+                setState(() {
+                  messages = _messages;
+                });
+              },
+            )
+          ],
+          title: Center(child: Text(widget.title)),
+        ),
+        body: FutureBuilder(
+          future: messages,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+              case ConnectionState.active:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case ConnectionState.done:
+                if (snapshot.hasError)
+                  return Text("There was an error: ${snapshot.error}");
+                var messages = snapshot.data;
+                return ListView.separated(
+                  itemCount: messages.length,
+                  separatorBuilder: (context, index) => Divider(),
+                  itemBuilder: (BuildContext context, int index) {
+                    Message message = messages[index];
+                    return ListTile(
+                      title: Text(message.subject),
+                      isThreeLine: true,
+                      leading: CircleAvatar(
+                        child: Text('As'),
+                      ),
+                      subtitle: Text(
+                        message.body,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  },
+                );
+            }
+          },
+        ));
   }
 }
