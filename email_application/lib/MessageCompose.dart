@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:email_application/Message.dart';
 import 'package:flutter/material.dart';
 
 class MessageCompose extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MessageComposeState extends State<MessageCompose> {
         title: Text('Compose Message'),
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
@@ -54,18 +55,16 @@ class _MessageComposeState extends State<MessageCompose> {
                   labelStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 maxLines: 9,
-              ),      
+              ),
             ),
             ListTile(
-              title: RaisedButton(
-                child: Text('SEND'),
-                onPressed: () {
-                  print(to);
-                  print(subject);
-                  print(body);
-                },
-              )      
-            ),
+                title: RaisedButton(
+              child: Text('SEND'),
+              onPressed: () {
+                Message message = Message(subject, body);
+                Navigator.pop(context, message);
+              },
+            )),
           ],
         ),
       ),

@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        accentColor: Colors.deepPurpleAccent,
         primarySwatch: Colors.purple,
       ),
       home: MessageList(title: 'Email App'),
