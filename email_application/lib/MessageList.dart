@@ -15,7 +15,7 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
-var future;
+  var future;
   List<Message> messages;
 
   void initState() {
@@ -91,26 +91,26 @@ var future;
         },
       ),
       floatingActionButton: FloatingActionButton(
-    child: Icon(Icons.add),
-    onPressed: () async {
-      Message message = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => MessageCompose(),
-        ),
-      );
-      if (message != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Your message has been sent'),
-          ),
-        );   
-        messages.add(message);
-        print(messages);
-        print(messages.length);
-      }
-    },
-    ),
+        child: Icon(Icons.add),
+        onPressed: () async {
+          Message message = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => MessageCompose(),
+            ),
+          );
+          if (message != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Your message has been sent'),
+              ),
+            );
+            messages.add(message);
+            print(messages);
+            print(messages.length);
+          }
+        },
+      ),
     );
   }
 }
