@@ -1,7 +1,9 @@
-import 'package:email_application/ComposeButton.dart';
+// import 'package:email_application/ComposeButton.dart';
 import 'package:email_application/Message.dart';
 import 'package:email_application/MessageDetail.dart';
 import 'package:flutter/material.dart';
+
+import 'MessageCompose.dart';
 
 class MessageList extends StatefulWidget {
   final String title;
@@ -88,7 +90,27 @@ var future;
           }
         },
       ),
-      floatingActionButton: ComposeButton(messages),
+      floatingActionButton: FloatingActionButton(
+    child: Icon(Icons.add),
+    onPressed: () async {
+      Message message = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => MessageCompose(),
+        ),
+      );
+      if (message != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Your message has been sent'),
+          ),
+        );   
+        messages.add(message);
+        print(messages);
+        print(messages.length);
+      }
+    },
+    ),
     );
   }
 }
