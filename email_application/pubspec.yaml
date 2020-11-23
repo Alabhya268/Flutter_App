@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.1
 
 dev_dependencies:
+  font_awesome_flutter: ^8.10.0
   http:
   build_runner:
   json_serializable:
