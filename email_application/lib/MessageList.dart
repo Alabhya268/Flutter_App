@@ -60,13 +60,25 @@ class _MessageListState extends State<MessageList> {
                 ),
                 otherAccountsPictures: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) =>
+                            AlertDialog(title: Text('Adding new account...')),
+                      );
+                    },
                     child: CircleAvatar(child: Icon(Icons.add)),
                   ),
                 ],
               ),
               ListTile(
                 title: Text("Inbox"),
+                trailing: Chip(
+                  label: Text(
+                    '11',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 leading: Icon(FontAwesomeIcons.inbox),
               ),
               ListTile(
