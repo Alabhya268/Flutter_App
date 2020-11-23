@@ -1,4 +1,6 @@
 // import 'package:email_application/ComposeButton.dart';
+import 'dart:ui';
+
 import 'package:email_application/Message.dart';
 import 'package:email_application/MessageDetail.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +42,8 @@ class _MessageListState extends State<MessageList> {
             IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () async {
-                var _messages = await Message.browse();
                 setState(() {
-                  messages = _messages;
+                  future = Message.browse();
                 });
               },
             )
@@ -106,7 +107,7 @@ class _MessageListState extends State<MessageList> {
                     leading: Icon(FontAwesomeIcons.cog),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -129,26 +130,53 @@ class _MessageListState extends State<MessageList> {
                   separatorBuilder: (context, index) => Divider(),
                   itemBuilder: (BuildContext context, int index) {
                     Message message = messages[index];
-                    return ListTile(
-                      title: Text(message.subject),
-                      isThreeLine: true,
-                      leading: CircleAvatar(
-                        child: Text('As'),
-                      ),
-                      subtitle: Text(
-                        message.body,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                MessageDetail(message.subject, message.body),
-                          ),
-                        );
+                    return Dismissible(
+                      onDismissed: (direction) {
+                        messages.removeAt(index);
                       },
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        color: Colors.red[300],
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.trash,
+                                color: Colors.white,
+                              ),
+                              SizedBox(height: 6),
+                              Text(
+                                'Delete',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      key: ObjectKey(message),
+                      child: ListTile(
+                        title: Text(message.subject),
+                        isThreeLine: true,
+                        leading: CircleAvatar(
+                          child: Text('As'),
+                        ),
+                        subtitle: Text(
+                          message.body,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MessageDetail(message.subject, message.body),
+                            ),
+                          );
+                        },
+                      ),
                     );
                   },
                 );
