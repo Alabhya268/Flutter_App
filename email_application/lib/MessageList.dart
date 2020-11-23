@@ -6,6 +6,7 @@ import 'package:email_application/MessageDetail.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'MessageCompose.dart';
 
@@ -124,38 +125,48 @@ class _MessageListState extends State<MessageList> {
               case ConnectionState.done:
                 if (snapshot.hasError)
                   return Text("There was an error: ${snapshot.error}");
-                var messages = snapshot.data;
+                List<Message> messages = snapshot.data;
                 return ListView.separated(
                   itemCount: messages.length,
                   separatorBuilder: (context, index) => Divider(),
                   itemBuilder: (BuildContext context, int index) {
                     Message message = messages[index];
-                    return Dismissible(
-                      onDismissed: (direction) {
-                        messages.removeAt(index);
-                      },
-                      background: Container(
-                        alignment: Alignment.centerRight,
-                        color: Colors.red[300],
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 16),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.trash,
-                                color: Colors.white,
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                'Delete',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    return Slidable(
                       key: ObjectKey(message),
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.25,
+                      actions: <Widget>[
+                        IconSlideAction(
+                          caption: 'Archive',
+                          color: Colors.blue,
+                          icon: Icons.archive,
+                          onTap: () {},
+                        ),
+                        IconSlideAction(
+                          caption: 'Share',
+                          color: Colors.indigo,
+                          icon: Icons.share,
+                          onTap: () {},
+                        ),
+                      ],
+                      secondaryActions: <Widget>[
+                        IconSlideAction(
+                          caption: 'More',
+                          color: Colors.black45,
+                          icon: Icons.more_horiz,
+                          onTap: () {},
+                        ),
+                        IconSlideAction(
+                          caption: 'Delete',
+                          color: Colors.red,
+                          icon: Icons.delete,
+                          onTap: () {
+                            setState(() {
+                              messages.removeAt(index);
+                            });
+                          },
+                        ),
+                      ],
                       child: ListTile(
                         title: Text(message.subject),
                         isThreeLine: true,
