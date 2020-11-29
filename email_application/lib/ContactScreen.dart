@@ -35,23 +35,33 @@ class ContactScreen extends StatelessWidget {
         ),
         drawer: AppDrawer(),
         body: StreamBuilder<List<Contact>>(
-            stream: manager.contactListView,
-            builder: (context, snapshot) {
-              List<Contact> contacts = snapshot.data;
-              return ListView.separated(
-                itemBuilder: (BuildContext context, int index) {
-                  Contact _contact = contacts[index];
-                  return ListTile(
-                    leading: CircleAvatar(),
-                    subtitle: Text(_contact.email),
-                    title: Text(_contact.name),
-                  );
-                },
-                itemCount: contacts?.length ?? 0,
-                separatorBuilder: (BuildContext context, int index) =>
-                    Divider(),
-              );
-            }),
+          stream: manager.contactListView,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+              case ConnectionState.active:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case ConnectionState.done:
+                List<Contact> contacts = snapshot.data;
+                return ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    Contact _contact = contacts[index];
+                    return ListTile(
+                      leading: CircleAvatar(),
+                      subtitle: Text(_contact.email),
+                      title: Text(_contact.name),
+                    );
+                  },
+                  itemCount: contacts?.length ?? 0,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(),
+                );
+            }
+          },
+        ),
       ),
     );
   }
