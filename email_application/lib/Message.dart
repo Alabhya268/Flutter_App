@@ -15,9 +15,12 @@ class Message {
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
 
-  static Future<List<Message>> browse() async {
-    http.Response response = await http
-        .get('https://run.mocky.io/v3/63460031-a7c6-417f-aecd-91dfb0a43b89');
+  static Future<List<Message>> browse({status = 'important'}) async {
+    String url = status == 'important'
+        ? 'https://run.mocky.io/v3/e3c4ee75-03ed-4c93-975d-546118f778dd'
+        : 'https://run.mocky.io/v3/63460031-a7c6-417f-aecd-91dfb0a43b89';
+
+    http.Response response = await http.get(url);
     String content = response.body;
     List collection = json.decode(content);
     List<Message> _messages =

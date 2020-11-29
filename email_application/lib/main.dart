@@ -1,9 +1,11 @@
+import 'package:email_application/App.dart';
 import 'package:flutter/material.dart';
-
-import 'MessageList.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.deepPurpleAccent,
         primarySwatch: Colors.purple,
       ),
-      home: MessageList(title: 'Email App'),
+      home: App(),
     );
   }
 }
