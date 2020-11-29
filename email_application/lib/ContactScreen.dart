@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'model/Contact.dart';
 import 'package:email_application/AppDrawer.dart';
 import 'package:email_application/ContactManager.dart';
+import 'package:email_application/model/Contact.dart';
 import 'package:flutter/material.dart';
 
 class ContactScreen extends StatelessWidget {
@@ -32,17 +34,20 @@ class ContactScreen extends StatelessWidget {
           ],
         ),
         drawer: AppDrawer(),
-        body: StreamBuilder<List<String>>(
-            stream: manager.contactListNow,
+        body: StreamBuilder<List<Contact>>(
+            stream: manager.contactListView,
             builder: (context, snapshot) {
-              List<String> contacts = snapshot.data;
+              List<Contact> contacts = snapshot.data;
               return ListView.separated(
                 itemBuilder: (BuildContext context, int index) {
+                  Contact _contact = contacts[index];
                   return ListTile(
-                    title: Text(contacts[index]),
+                    leading: CircleAvatar(),
+                    subtitle: Text(_contact.email),
+                    title: Text(_contact.name),
                   );
                 },
-                itemCount: contacts.length,
+                itemCount: contacts?.length ?? 0,
                 separatorBuilder: (BuildContext context, int index) =>
                     Divider(),
               );
