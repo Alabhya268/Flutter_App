@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:email_application/ContactSearchDelegate.dart';
+
 import 'model/Contact.dart';
 import 'package:email_application/AppDrawer.dart';
 import 'package:email_application/ContactManager.dart';
@@ -27,6 +29,14 @@ class ContactScreen extends StatelessWidget {
                     );
                   }),
               backgroundColor: Colors.deepOrange,
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                    context: context,
+                    delegate: ContactSearchDelegate(manager: manager));
+              },
             ),
             Padding(
               padding: EdgeInsets.only(right: 16),
