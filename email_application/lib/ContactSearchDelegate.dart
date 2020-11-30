@@ -1,3 +1,4 @@
+import 'package:email_application/ContactListBuilder.dart';
 import 'package:flutter/material.dart';
 
 import 'model/Contact.dart';
@@ -11,7 +12,9 @@ class ContactSearchDelegate extends SearchDelegate {
     return [
       IconButton(
         icon: Icon(Icons.clear),
-        onPressed: () {},
+        onPressed: () {
+          query = '';
+        },
       )
     ];
   }
@@ -33,18 +36,10 @@ class ContactSearchDelegate extends SearchDelegate {
         child: Text('Type atleast 3 letters'),
       );
     }
-    return StreamBuilder<List<Contact>>(
+
+    return ContactListBuilder(
       stream: manager.filteredCollection(query: query),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-          case ConnectionState.active:
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          case ConnectionState.done:
-            List<Contact> contacts = snapshot.data;
+      builder: (context, contacts) {
             return ListView.separated(
               itemBuilder: (BuildContext context, int index) {
                 Contact _contact = contacts[index];
@@ -57,7 +52,6 @@ class ContactSearchDelegate extends SearchDelegate {
               itemCount: contacts?.length ?? 0,
               separatorBuilder: (BuildContext context, int index) => Divider(),
             );
-        }
       },
     );
   }

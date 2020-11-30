@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:email_application/model/Contact.dart';
 import 'package:email_application/service/ContactService.dart';
-import 'package:flutter/material.dart';
 
 class ContactManager {
   final StreamController<int> _contactCounter = StreamController<int>();

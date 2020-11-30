@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:email_application/ContactListBuilder.dart';
 import 'package:email_application/ContactSearchDelegate.dart';
 
 import 'model/Contact.dart';
@@ -44,19 +45,10 @@ class ContactScreen extends StatelessWidget {
           ],
         ),
         drawer: AppDrawer(),
-        body: StreamBuilder<List<Contact>>(
+        body: ContactListBuilder(
           stream: manager.contactListView,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-              case ConnectionState.active:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              case ConnectionState.done:
-                List<Contact> contacts = snapshot.data;
-                return ListView.separated(
+          builder: (context, contacts) {
+            return ListView.separated(
                   itemBuilder: (BuildContext context, int index) {
                     Contact _contact = contacts[index];
                     return ListTile(
@@ -67,11 +59,10 @@ class ContactScreen extends StatelessWidget {
                   },
                   itemCount: contacts?.length ?? 0,
                   separatorBuilder: (BuildContext context, int index) =>
-                      Divider(),
+                  Divider(),
                 );
-            }
-          },
-        ),
+            },
+          ), 
       ),
     );
   }
