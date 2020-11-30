@@ -34,7 +34,7 @@ class ContactSearchDelegate extends SearchDelegate {
       );
     }
     return StreamBuilder<List<Contact>>(
-      stream: manager.contactListView,
+      stream: manager.filteredCollection(query: query),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
