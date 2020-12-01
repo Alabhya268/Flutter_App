@@ -18,7 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _mail = TextEditingController();
 
   AuthenticationService _authenticationService = AuthenticationService();
-  
 
   @override
   Widget build(BuildContext context) {
