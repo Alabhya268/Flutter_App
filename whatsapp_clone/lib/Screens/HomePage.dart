@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/LoginScreen.dart';
-import 'package:whatsapp_clone/Screens/Settingspage.dart';
 import 'package:whatsapp_clone/Services/AuthenticationService.dart';
+import 'package:whatsapp_clone/main.dart';
 import 'ChatScreen.dart';
 
 class HomePage extends StatelessWidget {
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()),
+                                  builder: (context) => MyApp()),
                             );
                           } else {
                             print('Failed to Sign Out!');

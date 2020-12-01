@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'Screens/LoginScreen.dart';
+import 'Services/AuthenticationService.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,9 +11,31 @@ Future<void> main() async {
   runApp(MaterialApp(home: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // Create the initialization Future outside of `build`:
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  AuthenticationService _authenticationService = AuthenticationService();
+
+  bool hasSigned = false;
+
+  initState() {
+    super.initState();
+    _authenticationService.authStateChanges.listen((User user) {
+      if (user == null) {
+        print('User is currently signed out!');
+        hasSigned = false;
+      } else {
+        print('User is signed in!');
+        hasSigned = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +54,7 @@ class MyApp extends StatelessWidget {
             title: 'WhatsApp',
             theme: ThemeData(
                 primarySwatch: Colors.teal, accentColor: Colors.green),
-            home: LoginScreen(),
+            home: hasSigned ? HomePage() : LoginScreen(),
           );
         }
 

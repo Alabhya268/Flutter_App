@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/SignupScreen.dart';
 import 'package:whatsapp_clone/Services/AuthenticationService.dart';
+import 'package:whatsapp_clone/main.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _mail = TextEditingController();
 
   AuthenticationService _authenticationService = AuthenticationService();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => MyApp()),
                             );
                           }
                         });

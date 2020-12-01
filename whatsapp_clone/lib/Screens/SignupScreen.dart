@@ -3,6 +3,7 @@ import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/LoginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsapp_clone/Services/AuthenticationService.dart';
+import 'package:whatsapp_clone/main.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -129,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()),
+                                    builder: (context) => MyApp()),
                               );
                             }
                           }
