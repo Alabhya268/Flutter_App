@@ -1,0 +1,110 @@
+import 'package:flutter/material.dart';
+
+class SignupScreen extends StatefulWidget {
+  @override
+  _SignupScreenState createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.28),
+        child: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: Text(
+              'SignUp',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
+            ),
+          ),
+        ),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Text('Enter Username and Password to Login'),
+              ),
+              SizedBox(height: 35),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 35, right: 35),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        icon: Icon(Icons.person_outline),
+                        hintText: 'Username',
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                  ),
+                  SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 35, right: 35),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        icon: Icon(Icons.lock_outline),
+                        hintText: 'Passward',
+                      ),
+                      obscureText: true,
+                      autofocus: false,
+                    ),
+                  ),
+                  SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 35, right: 35),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        icon: Icon(Icons.lock_outline),
+                        hintText: 'Confirm Passward',
+                      ),
+                      obscureText: true,
+                      autofocus: false,
+                    ),
+                  ),
+                  SizedBox(height: 25),
+                  FlatButton(
+                    child: Text('Signup'),
+                    color: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/homepage');
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Already have an account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/');
+                        },
+                        child: Text('Login'),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
