@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/Screens/ChatScreen.dart';
-import 'package:whatsapp_clone/Screens/HomePage.dart';
-import 'package:whatsapp_clone/Screens/SettingsPage.dart';
 import 'Screens/LoginScreen.dart';
 
 void main() {
@@ -13,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'WhatsApp',
       theme: ThemeData(primarySwatch: Colors.teal, accentColor: Colors.green),
       home: LoginScreen(),
     );

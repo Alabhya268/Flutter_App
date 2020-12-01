@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/LoginScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -8,6 +9,15 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String email = '';
+  String password = '';
+
+  final key = GlobalKey<FormState>();
+  final TextEditingController _pass = TextEditingController();
+  final TextEditingController _confirmPass = TextEditingController();
+  final TextEditingController _mail = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,86 +39,106 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             children: [
               Center(
-                child: Text('Enter Username and Password to Login'),
+                child: Text('Enter Username and Password to SignUp'),
               ),
               SizedBox(height: 35),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+              Form(
+                key: key,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 35, right: 35),
+                      child: TextFormField(
+                        controller: _mail,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          icon: Icon(Icons.person_outline),
+                          hintText: 'Username',
                         ),
-                        icon: Icon(Icons.person_outline),
-                        hintText: 'Username',
+                        keyboardType: TextInputType.emailAddress,
                       ),
-                      keyboardType: TextInputType.emailAddress,
                     ),
-                  ),
-                  SizedBox(height: 25),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                    SizedBox(height: 25),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 35, right: 35),
+                      child: TextFormField(
+                        controller: _pass,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          icon: Icon(Icons.lock_outline),
+                          hintText: 'Passward',
                         ),
-                        icon: Icon(Icons.lock_outline),
-                        hintText: 'Passward',
+                        obscureText: true,
+                        autofocus: false,
+                        validator: (value) {
+                          if (value.isEmpty) return 'Empty';
+                          return null;
+                        },
                       ),
-                      obscureText: true,
-                      autofocus: false,
                     ),
-                  ),
-                  SizedBox(height: 25),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                    SizedBox(height: 25),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 35, right: 35),
+                      child: TextFormField(
+                        controller: _confirmPass,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          icon: Icon(Icons.lock_outline),
+                          hintText: 'Confirm Passward',
                         ),
-                        icon: Icon(Icons.lock_outline),
-                        hintText: 'Confirm Passward',
+                        obscureText: true,
+                        autofocus: false,
+                        validator: (value) {
+                          if (value.isEmpty) return '!Empty';
+                          if (value != _pass.text)
+                            return '!Password does not Match';
+                          return null;
+                        },
                       ),
-                      obscureText: true,
-                      autofocus: false,
                     ),
-                  ),
-                  SizedBox(height: 25),
-                  FlatButton(
-                    child: Text('Signup'),
-                    color: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
-                    },
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Already have an account?'),
-                      TextButton(
-                        onPressed: () {
+                    SizedBox(height: 25),
+                    FlatButton(
+                      child: Text('Signup'),
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        print(email + " " + password);
+                        if (this.key.currentState.validate()) {
+                          this.key.currentState.save();                        
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           );
-                        },
-                        child: Text('Login'),
-                      )
-                    ],
-                  ),
-                ],
+                        }
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Already have an account?'),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()),
+                            );
+                          },
+                          child: Text('Login'),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/SignupScreen.dart';
@@ -10,6 +8,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = '';
+  String password = '';
+
+  final key = GlobalKey<FormState>();
+  final TextEditingController _pass = TextEditingController();
+  final TextEditingController _mail = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 35, right: 35),
                     child: TextFormField(
+                      controller: _mail,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -47,12 +52,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Username',
                       ),
                       keyboardType: TextInputType.emailAddress,
+                      onSaved: (value) {
+                        email = value;
+                      },
                     ),
                   ),
                   SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.only(left: 35, right: 35),
                     child: TextFormField(
+                      controller: _pass,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -62,6 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       obscureText: true,
                       autofocus: false,
+                      onSaved: (value) {
+                        password = value;
+                      },
                     ),
                   ),
                   SizedBox(height: 25),
