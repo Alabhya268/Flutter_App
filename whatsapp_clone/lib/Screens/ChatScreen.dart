@@ -26,38 +26,35 @@ class _ChatScreenState extends State<ChatScreen> {
           PopupMenuButton(
             itemBuilder: (BuildContext context) {
               return [
-                  PopupMenuItem(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text('View contact'),
-                    ),
+                PopupMenuItem(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text('View contact'),
                   ),
-                  PopupMenuItem(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text('Media, link ans docs'),
-                    ),
+                ),
+                PopupMenuItem(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text('Media, link ans docs'),
                   ),
-                  PopupMenuItem(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text('Search'),
-                    ),
+                ),
+                PopupMenuItem(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text('Search'),
                   ),
-                  PopupMenuItem(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text('Mute Notification'),
-                    ),
+                ),
+                PopupMenuItem(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text('Mute Notification'),
                   ),
-                ];
+                ),
+              ];
             },
           )
         ],
       ),
-      body: FlatButton(onPressed: () {Navigator.pop(context);
-      },
-      child: null,),
     );
   }
 }

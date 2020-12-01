@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/Settingspage.dart';
 import 'ChatScreen.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,18 +33,17 @@ class HomePage extends StatelessWidget {
                   PopupMenuItem(
                     child: TextButton(
                       onPressed: () {},
-                      child: Text('WhatsApp Web'),
-                    ),
-                  ),
-                  PopupMenuItem(
-                    child: TextButton(
-                      onPressed: () {},
                       child: Text('Starred messages'),
                     ),
                   ),
                   PopupMenuItem(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //             Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => SettingsPage()),
+                        // );
+                      },
                       child: Text('Settings'),
                     ),
                   ),

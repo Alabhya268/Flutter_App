@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/ChatScreen.dart';
 import 'package:whatsapp_clone/Screens/HomePage.dart';
-import 'package:whatsapp_clone/Screens/SignupScreen.dart';
+import 'package:whatsapp_clone/Screens/SettingsPage.dart';
 import 'Screens/LoginScreen.dart';
 
 void main() {
@@ -15,13 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.teal, accentColor: Colors.green),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => LoginScreen(),
-        '/signup': (context) => SignupScreen(),
-        '/chatscreen': (context) => ChatScreen(),
-        '/homepage': (context) => HomePage(),
-      },
+      home: LoginScreen(),
     );
   }
 }

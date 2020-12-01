@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/HomePage.dart';
+import 'package:whatsapp_clone/Screens/LoginScreen.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _SignupScreenState createState() => _SignupScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +86,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/homepage');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
                     },
                   ),
                   Row(
@@ -93,7 +98,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       Text('Already have an account?'),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
                         },
                         child: Text('Login'),
                       )

@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/SignupScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -72,7 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/homepage');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
                     },
                   ),
                   Row(
@@ -81,7 +85,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text('New User?'),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/signup');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpScreen()),
+                          );
                         },
                         child: Text('Signup'),
                       )
