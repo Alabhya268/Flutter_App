@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/LoginScreen.dart';
 import 'package:whatsapp_clone/Screens/Settingspage.dart';
+import 'package:whatsapp_clone/Services/AuthenticationService.dart';
 import 'ChatScreen.dart';
 
 class HomePage extends StatelessWidget {
+  AuthenticationService _authenticationService = AuthenticationService();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -45,6 +50,27 @@ class HomePage extends StatelessWidget {
                         // );
                       },
                       child: Text('Settings'),
+                    ),
+                  ),
+                  PopupMenuItem(
+                    child: TextButton(
+                      child: Text('Sign Out'),
+                      onPressed: () {
+                        _authenticationService.signOut();
+                        _authenticationService.authStateChanges
+                            .listen((User user) {
+                          if (user == null) {
+                            print('User is currently signed out!');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()),
+                            );
+                          } else {
+                            print('Failed to Sign Out!');
+                          }
+                        });
+                      },
                     ),
                   ),
                 ];

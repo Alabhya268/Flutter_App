@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/SignupScreen.dart';
+import 'package:whatsapp_clone/Services/AuthenticationService.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,6 +16,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final key = GlobalKey<FormState>();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _mail = TextEditingController();
+
+  AuthenticationService _authenticationService = AuthenticationService();
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,19 +84,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 25),
                   FlatButton(
-                    child: Text('Login'),
-                    color: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
-                    },
-                  ),
+                      child: Text('Login'),
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        _authenticationService.signIn(
+                            email: _mail.text, password: _pass.text);
+                        _authenticationService.authStateChanges
+                            .listen((User user) {
+                          if (user == null) {
+                            print('User is currently signed out!');
+                          } else {
+                            print('User is signed in!');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
+                          }
+                        });
+                      }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

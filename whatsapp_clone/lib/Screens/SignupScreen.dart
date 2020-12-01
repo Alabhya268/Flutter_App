@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/LoginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:whatsapp_clone/Services/AuthenticationService.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _mail = TextEditingController();
+
+  AuthenticationService _authenticationService = AuthenticationService();
 
   @override
   Widget build(BuildContext context) {
@@ -110,15 +113,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       textColor: Colors.white,
-                      onPressed: () {
+                      onPressed: () async {
+                        await _authenticationService.signUp(
+                            email: _mail.text, password: _pass.text);
+                        _authenticationService.signIn(
+                            email: _mail.text, password: _pass.text);
+                        _authenticationService.authStateChanges
+                            .listen((User user) {
+                          if (user == null) {
+                            print('User is currently signed out!');
+                          } else {
+                            print('User is signed in!');
+                            if (this.key.currentState.validate()) {
+                              this.key.currentState.save();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()),
+                              );
+                            }
+                          }
+                        });
                         print(email + " " + password);
-                        if (this.key.currentState.validate()) {
-                          this.key.currentState.save();                        
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
-                        }
                       },
                     ),
                     Row(
