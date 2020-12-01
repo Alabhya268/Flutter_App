@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/Screens/HomePage.dart';
 import 'package:whatsapp_clone/Screens/SignupScreen.dart';
 import 'package:whatsapp_clone/Services/AuthenticationService.dart';
 import 'package:whatsapp_clone/main.dart';
@@ -85,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 25),
                   FlatButton(
                       child: Text('Login'),
-                      color: Colors.green,
+                      color: Colors.deepPurpleAccent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),

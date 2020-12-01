@@ -53,7 +53,8 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
             title: 'WhatsApp',
             theme: ThemeData(
-                primarySwatch: Colors.teal, accentColor: Colors.green),
+                primarySwatch: Colors.deepPurple,
+                accentColor: Colors.deepPurpleAccent),
             home: hasSigned ? HomePage() : LoginScreen(),
           );
         }
