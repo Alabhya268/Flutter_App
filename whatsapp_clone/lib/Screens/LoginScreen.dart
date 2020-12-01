@@ -19,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _mail = TextEditingController();
 
   AuthenticationService _authenticationService = AuthenticationService();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             print('User is signed in!');
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyApp()),
+                              MaterialPageRoute(builder: (context) => MyApp()),
                             );
                           }
                         });

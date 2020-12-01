@@ -63,8 +63,7 @@ class HomePage extends StatelessWidget {
                             print('User is currently signed out!');
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyApp()),
+                              MaterialPageRoute(builder: (context) => MyApp()),
                             );
                           } else {
                             print('Failed to Sign Out!');
