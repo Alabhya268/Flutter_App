@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.1
 
 dev_dependencies:
+  rxdart:
   flutter_slidable:
   font_awesome_flutter:
   http:
